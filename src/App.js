@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+
+import "./App.css";
+import { Learn } from "./Learn";
 
 function App() {
+  React.useEffect(() => {
+    if (window.location.hash) {
+      const idElement = window.location.hash.slice(1);
+      const element = document.getElementById(idElement);
+      const elementPositionY = element.getBoundingClientRect().top;
+      const marginOffset = 50;
+      const offsetPosition = elementPositionY + window.scrollY - marginOffset;
+      window.scrollTo({ top: offsetPosition });
+    }
+  }, []);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Learn.ScrollToElement />
     </div>
   );
 }
